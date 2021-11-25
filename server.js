@@ -2,14 +2,15 @@ const express = require("express");
 const app = express();
 
 let broadcaster;
-const port = 4000;
+const corsAllow = process.env.cors || '*';
+const port = process.env.port || 8088;
 
 const http = require("http");
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
 	cors: {
-		origin: ['http://localhost:8601']
+		origin: [corsAllow]
 	}
 });
 app.use(express.static(__dirname + "/public"));
