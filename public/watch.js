@@ -2,7 +2,10 @@ let peerConnection;
 const config = {
   iceServers: [
       { 
-        "urls": "stun:stun.l.google.com:19302",
+        //"urls": "stun:stun.l.google.com:19302",
+		"urls": "turn:ec2-35-177-213-64.eu-west-2.compute.amazonaws.com:3478",
+		"username":"nedeljkoseslija",
+		"credential":"01Barajevo!"
       },
       // { 
       //   "urls": "turn:TURN_IP?transport=tcp",
