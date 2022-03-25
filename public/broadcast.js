@@ -16,6 +16,7 @@ const config = {
 };
 
 const socket = io.connect(window.location.origin);
+var sdpConstraints = { 'mandatory': { 'OfferToReceiveAudio': false, 'OfferToReceiveVideo': false } };
 
 socket.on("answer", (id, description) => {
   peerConnections[id].setRemoteDescription(description);
@@ -35,7 +36,7 @@ socket.on("watcher", id => {
   };
 
   peerConnection
-    .createOffer()
+    .createOffer(sdpConstraints)
     .then(sdp => peerConnection.setLocalDescription(sdp))
     .then(() => {
       socket.emit("offer", id, peerConnection.localDescription);
@@ -95,7 +96,7 @@ function getStream() {
   const audioSource = audioSelect.value;
   const videoSource = videoSelect.value;
   const constraints = {
-    audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+    audio: false,
     video: { deviceId: videoSource ? { exact: videoSource } : undefined, width: {exact: 640}, height: {exact: 480}, frameRate: {exact:20} }
   };
   return navigator.mediaDevices
