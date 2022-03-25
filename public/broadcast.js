@@ -16,7 +16,7 @@ const config = {
 };
 
 const socket = io.connect(window.location.origin);
-var sdpConstraints = { 'mandatory': { 'OfferToReceiveAudio': false, 'OfferToReceiveVideo': false } };
+var sdpConstraints = { 'mandatory': { 'offerToReceiveAudio': false, 'offerToReceiveVideo': false } };
 
 socket.on("answer", (id, description) => {
   peerConnections[id].setRemoteDescription(description);
